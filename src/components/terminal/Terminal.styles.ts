@@ -56,8 +56,7 @@ export const TerminalContent = styled.div`
   box-sizing: inherit;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  height: 254px;
+  min-height: 500px;
   padding: 0.5rem 0rem 0rem 0.5rem;
-  display: flex;
   background-color: rgb(23, 42, 69);
 `;
