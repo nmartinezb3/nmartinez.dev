@@ -6,7 +6,9 @@ interface IExperienceCommandOutput {
   showAll: boolean;
 }
 
-function ExperienceCommandOutput(props: IExperienceCommandOutput) {
+const ExperienceCommandOutput: React.FunctionComponent<IExperienceCommandOutput> = (
+  props: IExperienceCommandOutput
+) => {
   return (
     <TerminalLineOutput>
       <ul>
@@ -95,6 +97,6 @@ function ExperienceCommandOutput(props: IExperienceCommandOutput) {
       </ul>
     </TerminalLineOutput>
   );
-}
+};
 
 export default ExperienceCommandOutput;

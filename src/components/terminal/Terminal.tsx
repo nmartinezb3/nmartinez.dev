@@ -7,9 +7,9 @@ import {
 } from './Terminal.styles';
 import { TerminalLineOutput, CommandText } from './TerminalLine.styles';
 import TerminalInput from '../terminalInput/TerminalInput';
-import { TerminalOutput } from '../terminalOutput/TerminalOutput';
+import TerminalOutput from '../terminalOutput/TerminalOutput';
 
-function Terminal() {
+const Terminal: React.FunctionComponent = () => {
   const [commands, setCommands] = useState<string[]>([]);
   const [lastCommandIndex, setLastCommandIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -65,5 +65,5 @@ function Terminal() {
       </TerminalContent>
     </>
   );
-}
+};
 export default Terminal;

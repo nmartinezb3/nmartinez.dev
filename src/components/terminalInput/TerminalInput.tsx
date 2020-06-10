@@ -18,7 +18,7 @@ interface ITerminalInputProps {
   getNextCommand?: () => string;
 }
 
-const TerminalInput = React.forwardRef((props: ITerminalInputProps, ref: any) => {
+const TerminalInputRef = (props: ITerminalInputProps, ref: any) => {
   const [command, setCommand] = useState('');
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(event.target.value);
@@ -27,14 +27,14 @@ const TerminalInput = React.forwardRef((props: ITerminalInputProps, ref: any) =>
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       setCommand('');
-      props.onEnter!(command);
+      props.onEnter && props.onEnter(command);
     } else if (event.keyCode === 38) {
       // key up
-      const previuosCommand = props.getPreviousCommand!();
+      const previuosCommand = (props.getPreviousCommand && props.getPreviousCommand()) || '';
       setCommand(previuosCommand);
     } else if (event.keyCode === 40) {
       // key down
-      const nextCommand = props.getNextCommand!();
+      const nextCommand = (props.getNextCommand && props.getNextCommand()) || '';
       setCommand(nextCommand);
     }
   };
@@ -56,5 +56,6 @@ const TerminalInput = React.forwardRef((props: ITerminalInputProps, ref: any) =>
       )}
     </TerminalInputContainer>
   );
-});
+};
+const TerminalInput = React.forwardRef(TerminalInputRef);
 export default TerminalInput;
