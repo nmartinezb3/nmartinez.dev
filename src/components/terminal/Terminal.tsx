@@ -11,9 +11,26 @@ import { TerminalOutput } from '../terminalOutput/TerminalOutput';
 
 function Terminal() {
   const [commands, setCommands] = useState<string[]>([]);
-  const onEnterCommand = useCallback((command: string) => {
-    setCommands((prevCommands) => [...prevCommands, command]);
-  }, []);
+  const [lastCommandIndex, setLastCommandIndex] = useState<number>(-1);
+  const onEnterCommand = useCallback(
+    (command: string) => {
+      setCommands((prevCommands) => [...prevCommands, command]);
+      setLastCommandIndex(commands.length);
+    },
+    [commands]
+  );
+
+  const getPreviousCommand = (): string => {
+    if (lastCommandIndex > -1) {
+      const command = commands[lastCommandIndex];
+      setLastCommandIndex((prevIndex) => prevIndex - 1);
+      return command;
+    }
+    return '';
+  };
+  const getNextCommand = (): string => {
+    return '';
+  };
   return (
     <>
       <TerminalHeader>
@@ -33,7 +50,11 @@ function Terminal() {
             <TerminalOutput command={command} />
           </div>
         ))}
-        <TerminalInput onEnter={onEnterCommand} />
+        <TerminalInput
+          onEnter={onEnterCommand}
+          getPreviousCommand={getPreviousCommand}
+          getNextCommand={getNextCommand}
+        />
       </TerminalContent>
     </>
   );

@@ -14,6 +14,8 @@ interface ITerminalInputProps {
   onEnter?: (command: string) => void;
   readOnly?: boolean;
   command?: string;
+  getPreviousCommand?: () => string;
+  getNextCommand?: () => string;
 }
 
 const TerminalInput = React.forwardRef((props: ITerminalInputProps, ref: any) => {
@@ -26,6 +28,14 @@ const TerminalInput = React.forwardRef((props: ITerminalInputProps, ref: any) =>
     if (event.key === 'Enter') {
       setCommand('');
       props.onEnter!(command);
+    } else if (event.keyCode === 38) {
+      // key up
+      const previuosCommand = props.getPreviousCommand!();
+      setCommand(previuosCommand);
+    } else if (event.keyCode === 40) {
+      // key down
+      const nextCommand = props.getNextCommand!();
+      setCommand(nextCommand);
     }
   };
   return (
