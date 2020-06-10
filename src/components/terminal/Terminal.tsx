@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import {
   TerminalHeader,
   TerminalHeaderButton,
@@ -12,6 +12,8 @@ import { TerminalOutput } from '../terminalOutput/TerminalOutput';
 function Terminal() {
   const [commands, setCommands] = useState<string[]>([]);
   const [lastCommandIndex, setLastCommandIndex] = useState<number>(-1);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const onEnterCommand = useCallback(
     (command: string) => {
       setCommands((prevCommands) => [...prevCommands, command]);
@@ -19,6 +21,10 @@ function Terminal() {
     },
     [commands]
   );
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [commands]);
 
   const getPreviousCommand = (): string => {
     if (lastCommandIndex > -1) {
@@ -51,6 +57,7 @@ function Terminal() {
           </div>
         ))}
         <TerminalInput
+          ref={inputRef}
           onEnter={onEnterCommand}
           getPreviousCommand={getPreviousCommand}
           getNextCommand={getNextCommand}
