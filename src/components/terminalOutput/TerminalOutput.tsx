@@ -2,19 +2,19 @@ import React from 'react';
 import { CommandText, TerminalLineOutput } from '../terminal/TerminalLine.styles';
 import styled from 'styled-components';
 import ExperienceCommandOutput from './ExperienceCommandOutput';
+import { Link } from './TerminalOutput.styles';
 
 enum Command {
   HELP = 'help',
   ABOUT = 'about',
+  EXPERIENCE = 'experience',
+  EXPERIENCE_ALL = 'experience --all',
 }
 
 interface ITerminalOutputProps {
   command: string;
 }
 
-const Link = styled.a`
-  color: red;
-`;
 export function TerminalOutput(props: ITerminalOutputProps) {
   switch (props.command) {
     case Command.HELP:
@@ -43,7 +43,13 @@ export function TerminalOutput(props: ITerminalOutputProps) {
           Outside of my job, I love surfing and traveling.
         </TerminalLineOutput>
       );
+    case Command.EXPERIENCE:
+    case Command.EXPERIENCE_ALL:
+      return <ExperienceCommandOutput showAll={props.command.includes('--all')} />;
     default:
+      if (props.command === '') {
+        return <div />;
+      }
       return <TerminalLineOutput>command not found: {props.command}</TerminalLineOutput>;
   }
 }
