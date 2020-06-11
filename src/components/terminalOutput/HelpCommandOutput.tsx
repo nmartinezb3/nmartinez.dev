@@ -6,7 +6,7 @@ const HelpCommandOutput: React.FunctionComponent = () => {
     <TerminalLineOutput>
       Supported commands: <CommandText>about</CommandText>,{' '}
       <CommandText>experience [--all]</CommandText>, <CommandText>education</CommandText>,{' '}
-      <CommandText>skills</CommandText>
+      <CommandText>skills</CommandText>, <CommandText>download-cv</CommandText>,{' '}
     </TerminalLineOutput>
   );
 };

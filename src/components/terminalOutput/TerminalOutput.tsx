@@ -5,6 +5,7 @@ import AboutCommandOutput from './AboutCommandOutput';
 import HelpCommandOutput from './HelpCommandOutput';
 import NotFoundCommandOutput from './NotFoundCommandOutput';
 import SkillsCommandOutput from './SkillsCommandOutput';
+import DownloadCvCommandOutput from './DownloadCvCommandOutput';
 
 enum Command {
   HELP = 'help',
@@ -13,6 +14,7 @@ enum Command {
   EXPERIENCE_ALL = 'experience --all',
   EDUCATION = 'education',
   SKILLS = 'skills',
+  DOWNLOAD_CV = 'download-cv',
 }
 
 interface ITerminalOutputProps {
@@ -34,6 +36,8 @@ const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
       return <EducationCommandOutput />;
     case Command.SKILLS:
       return <SkillsCommandOutput />;
+    case Command.DOWNLOAD_CV:
+      return <DownloadCvCommandOutput />;
     default:
       if (props.command === '') {
         return <div />;
