@@ -48,6 +48,10 @@ const Terminal: React.FunctionComponent = () => {
     inputRef.current?.focus();
   }, []);
 
+  const onClearCommands = () => {
+    setCommands([]);
+  };
+
   return (
     <TerminalWrapper>
       <TerminalHeader>
@@ -61,11 +65,10 @@ const Terminal: React.FunctionComponent = () => {
           Welcome to nmartinez.dev! Type <CommandText>help</CommandText> for a list of supported
           commands
         </TerminalLineOutput>
-        <TerminalLineOutput>{}</TerminalLineOutput>
         {commands.map((command) => (
           <div key={command}>
             <TerminalInput readOnly command={command} />
-            <TerminalOutput command={command} />
+            <TerminalOutput command={command} onClearCommands={onClearCommands} />
           </div>
         ))}
         <TerminalInput

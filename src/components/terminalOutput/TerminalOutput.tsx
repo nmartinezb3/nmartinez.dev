@@ -15,10 +15,12 @@ enum Command {
   EDUCATION = 'education',
   SKILLS = 'skills',
   DOWNLOAD_CV = 'download-cv',
+  CLEAR = 'clear',
 }
 
 interface ITerminalOutputProps {
   command: string;
+  onClearCommands: () => void;
 }
 
 const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
@@ -38,6 +40,9 @@ const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
       return <SkillsCommandOutput />;
     case Command.DOWNLOAD_CV:
       return <DownloadCvCommandOutput />;
+    case Command.CLEAR:
+      props.onClearCommands();
+      return null;
     default:
       if (props.command === '') {
         return <div />;
