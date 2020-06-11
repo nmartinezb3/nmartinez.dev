@@ -4,6 +4,7 @@ import EducationCommandOutput from './EducationCommandOutput';
 import AboutCommandOutput from './AboutCommandOutput';
 import HelpCommandOutput from './HelpCommandOutput';
 import NotFoundCommandOutput from './NotFoundCommandOutput';
+import SkillsCommandOutput from './SkillsCommandOutput';
 
 enum Command {
   HELP = 'help',
@@ -11,6 +12,7 @@ enum Command {
   EXPERIENCE = 'experience',
   EXPERIENCE_ALL = 'experience --all',
   EDUCATION = 'education',
+  SKILLS = 'skills',
 }
 
 interface ITerminalOutputProps {
@@ -30,6 +32,8 @@ const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
       return <ExperienceCommandOutput showAll={props.command.includes('--all')} />;
     case Command.EDUCATION:
       return <EducationCommandOutput />;
+    case Command.SKILLS:
+      return <SkillsCommandOutput />;
     default:
       if (props.command === '') {
         return <div />;
