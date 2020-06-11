@@ -6,6 +6,7 @@ import HelpCommandOutput from './HelpCommandOutput';
 import NotFoundCommandOutput from './NotFoundCommandOutput';
 import SkillsCommandOutput from './SkillsCommandOutput';
 import DownloadCvCommandOutput from './DownloadCvCommandOutput';
+import SudoCommandOutput from './SudoCommandOutput';
 
 enum Command {
   HELP = 'help',
@@ -16,12 +17,20 @@ enum Command {
   SKILLS = 'skills',
   DOWNLOAD_CV = 'download-cv',
   CLEAR = 'clear',
+  SUDO = 'sudo',
 }
 
 interface ITerminalOutputProps {
   command: string;
   onClearCommands: () => void;
 }
+
+const checkSudo = (input: string) => {
+  if (input.match(/^sudo$|^sudo\s\w*/)) {
+    return input;
+  }
+  return '';
+};
 
 const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
   props: ITerminalOutputProps
@@ -40,6 +49,8 @@ const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
       return <SkillsCommandOutput />;
     case Command.DOWNLOAD_CV:
       return <DownloadCvCommandOutput />;
+    case checkSudo(props.command):
+      return <SudoCommandOutput />;
     case Command.CLEAR:
       props.onClearCommands();
       return null;
