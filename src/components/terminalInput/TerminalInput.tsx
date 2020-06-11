@@ -28,6 +28,9 @@ const TerminalInputRef = (props: ITerminalInputProps, ref: any) => {
     if (event.key === 'Enter') {
       setCommand('');
       props.onEnter && props.onEnter(command);
+      setTimeout(() => {
+        scrollToBottom();
+      }, 0);
     } else if (event.keyCode === 38) {
       // key up
       const previuosCommand = (props.getPreviousCommand && props.getPreviousCommand()) || '';
@@ -37,6 +40,10 @@ const TerminalInputRef = (props: ITerminalInputProps, ref: any) => {
       const nextCommand = (props.getNextCommand && props.getNextCommand()) || '';
       setCommand(nextCommand);
     }
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo(0, document.body.scrollHeight);
   };
   return (
     <TerminalInputContainer>
