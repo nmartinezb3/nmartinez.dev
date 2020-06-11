@@ -37,6 +37,10 @@ const Terminal: React.FunctionComponent = () => {
   const getNextCommand = (): string => {
     return '';
   };
+
+  const onClickTerminal = useCallback(() => {
+    inputRef.current?.focus();
+  }, []);
   return (
     <>
       <TerminalHeader>
@@ -45,7 +49,7 @@ const Terminal: React.FunctionComponent = () => {
         <TerminalHeaderButton type="max" />
         <TerminalHeaderTextText>guest@nmartinez.dev: ~</TerminalHeaderTextText>
       </TerminalHeader>
-      <TerminalContent>
+      <TerminalContent onClick={onClickTerminal}>
         <TerminalLineOutput>
           Welcome to nmartinez.dev! Type <CommandText>help</CommandText> for a list of supported
           commands
