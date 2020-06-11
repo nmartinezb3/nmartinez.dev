@@ -28,7 +28,7 @@ interface IInputProps {
   length: number;
 }
 export const Input = styled.input<IInputProps>`
-  caret-color: transparent;
+  /* caret-color: transparent; */
   background: none;
   border: none;
   outline: none;

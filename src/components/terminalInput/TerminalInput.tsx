@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   ArrowIconWrapper,
   DirectoryIconWrapper,
@@ -23,17 +23,16 @@ const TerminalInputRef = (props: ITerminalInputProps, ref: any) => {
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setCommand(event.target.value);
   }, []);
+  const shouldMoveCaret = useRef(false);
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       setCommand('');
       props.onEnter && props.onEnter(command);
-      setTimeout(() => {
-        scrollToBottom();
-      }, 0);
     } else if (event.keyCode === 38) {
       // key up
       const previuosCommand = (props.getPreviousCommand && props.getPreviousCommand()) || '';
+      shouldMoveCaret.current = true;
       setCommand(previuosCommand);
     } else if (event.keyCode === 40) {
       // key down
@@ -42,9 +41,14 @@ const TerminalInputRef = (props: ITerminalInputProps, ref: any) => {
     }
   };
 
-  const scrollToBottom = () => {
-    window.scrollTo(0, document.body.scrollHeight);
-  };
+  useEffect(() => {
+    if (ref && shouldMoveCaret && shouldMoveCaret.current) {
+      ref.current.selectionStart = command.length;
+      ref.current.selectionEnd = command.length;
+      shouldMoveCaret.current = false;
+    }
+  }, [command]);
+
   return (
     <TerminalInputContainer>
       <ArrowIcon />

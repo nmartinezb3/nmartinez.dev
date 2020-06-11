@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import {
+  TerminalWrapper,
   TerminalHeader,
   TerminalHeaderButton,
   TerminalHeaderTextText,
@@ -13,6 +14,7 @@ const Terminal: React.FunctionComponent = () => {
   const [commands, setCommands] = useState<string[]>([]);
   const [lastCommandIndex, setLastCommandIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const terminalContentRef = useRef<HTMLDivElement>(null);
 
   const onEnterCommand = useCallback(
     (command: string) => {
@@ -24,6 +26,10 @@ const Terminal: React.FunctionComponent = () => {
 
   useEffect(() => {
     inputRef.current?.focus();
+    terminalContentRef.current?.scrollTo({
+      behavior: 'smooth',
+      top: terminalContentRef.current.scrollHeight,
+    });
   }, [commands]);
 
   const getPreviousCommand = (): string => {
@@ -41,19 +47,21 @@ const Terminal: React.FunctionComponent = () => {
   const onClickTerminal = useCallback(() => {
     inputRef.current?.focus();
   }, []);
+
   return (
-    <>
+    <TerminalWrapper>
       <TerminalHeader>
         <TerminalHeaderButton type="close" />
         <TerminalHeaderButton type="min" />
         <TerminalHeaderButton type="max" />
         <TerminalHeaderTextText>guest@nmartinez.dev: ~</TerminalHeaderTextText>
       </TerminalHeader>
-      <TerminalContent onClick={onClickTerminal}>
+      <TerminalContent onClick={onClickTerminal} ref={terminalContentRef}>
         <TerminalLineOutput>
           Welcome to nmartinez.dev! Type <CommandText>help</CommandText> for a list of supported
           commands
         </TerminalLineOutput>
+        <TerminalLineOutput>{}</TerminalLineOutput>
         {commands.map((command) => (
           <div key={command}>
             <TerminalInput readOnly command={command} />
@@ -67,7 +75,7 @@ const Terminal: React.FunctionComponent = () => {
           getNextCommand={getNextCommand}
         />
       </TerminalContent>
-    </>
+    </TerminalWrapper>
   );
 };
 export default Terminal;

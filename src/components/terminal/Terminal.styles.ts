@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const TerminalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
 export const TerminalHeader = styled.div`
   height: 30px;
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
@@ -49,6 +55,7 @@ export const TerminalHeaderTextText = styled.div`
 `;
 
 export const TerminalContent = styled.div`
+  padding: 10px;
   color: #4a4a4a;
   font-size: 1rem;
   font-weight: 400;
@@ -56,7 +63,16 @@ export const TerminalContent = styled.div`
   box-sizing: inherit;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  min-height: 500px;
-  padding: 0.5rem 0rem 0rem 0.5rem;
+  overflow: auto;
   background-color: rgb(23, 42, 69);
+  flex: 1;
+
+  max-height: 700px;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
 `;

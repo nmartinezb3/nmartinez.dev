@@ -17,7 +17,7 @@ const AboutCommandOutput: React.FunctionComponent = () => {
         Nobly POS
       </Link>{' '}
       as a Full Stack Engineer. <br />
-      Outside of my job, I love surfing and traveling.
+      Outside of my job, I love surfing 🏄‍♂️ and traveling 🛫.
     </TerminalLineOutput>
   );
 };
