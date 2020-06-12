@@ -8,7 +8,7 @@ import SkillsCommandOutput from './SkillsCommandOutput';
 import DownloadCvCommandOutput from './DownloadCvCommandOutput';
 import SudoCommandOutput from './SudoCommandOutput';
 
-enum Command {
+export enum Command {
   HELP = 'help',
   ABOUT = 'about',
   EXPERIENCE = 'experience',
@@ -29,7 +29,7 @@ const checkSudo = (input: string) => {
   if (input.match(/^sudo$|^sudo\s\w*/)) {
     return input;
   }
-  return '';
+  return 'sudo';
 };
 
 const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (

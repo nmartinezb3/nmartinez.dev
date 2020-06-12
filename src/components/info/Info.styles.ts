@@ -6,7 +6,7 @@ export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  padding: 30px;
+  padding: 20px 15px 15px;
 `;
 
 export const Avatar = styled.img`
@@ -20,7 +20,7 @@ export const Profile = styled.div`
   background-color: rgb(10, 25, 47);
   flex: 1;
   border-radius: 5px;
-  margin-top: 30px;
+  margin-top: 10px;
   padding: 10px;
 `;
 

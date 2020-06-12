@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const AppContainer = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
 `;
 
 export const Layout = styled.div`

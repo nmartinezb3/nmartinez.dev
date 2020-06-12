@@ -13,5 +13,7 @@ module.exports = {
     },
   },
   extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/recommended'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-empty-function': 0,
+  },
 };

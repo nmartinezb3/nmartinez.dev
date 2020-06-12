@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Link = styled.a`
   color: red;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const CheckIconWrapper = styled.span`

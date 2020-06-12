@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const TerminalWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 600px;
 `;
 
 export const TerminalHeader = styled.div`
@@ -66,9 +66,6 @@ export const TerminalContent = styled.div`
   overflow: auto;
   background-color: rgb(23, 42, 69);
   flex: 1;
-
-  max-height: 700px;
-
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {

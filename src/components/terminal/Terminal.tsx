@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import {
   TerminalWrapper,
   TerminalHeader,
@@ -9,20 +9,12 @@ import {
 import { TerminalLineOutput, CommandText } from './TerminalLine.styles';
 import TerminalInput from '../terminalInput/TerminalInput';
 import TerminalOutput from '../terminalOutput/TerminalOutput';
+import useTerminal from '../../terminalState/useTerminal';
 
 const Terminal: React.FunctionComponent = () => {
-  const [commands, setCommands] = useState<string[]>([]);
-  const [lastCommandIndex, setLastCommandIndex] = useState<number>(-1);
+  const { terminalState, runCommand, clearTerminal, getPreviousCommand } = useTerminal();
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalContentRef = useRef<HTMLDivElement>(null);
-
-  const onEnterCommand = useCallback(
-    (command: string) => {
-      setCommands((prevCommands) => [...prevCommands, command]);
-      setLastCommandIndex(commands.length);
-    },
-    [commands]
-  );
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -30,16 +22,8 @@ const Terminal: React.FunctionComponent = () => {
       behavior: 'smooth',
       top: terminalContentRef.current.scrollHeight,
     });
-  }, [commands]);
+  }, [terminalState.commands]);
 
-  const getPreviousCommand = (): string => {
-    if (lastCommandIndex > -1) {
-      const command = commands[lastCommandIndex];
-      setLastCommandIndex((prevIndex) => prevIndex - 1);
-      return command;
-    }
-    return '';
-  };
   const getNextCommand = (): string => {
     return '';
   };
@@ -47,10 +31,6 @@ const Terminal: React.FunctionComponent = () => {
   const onClickTerminal = useCallback(() => {
     inputRef.current?.focus();
   }, []);
-
-  const onClearCommands = () => {
-    setCommands([]);
-  };
 
   return (
     <TerminalWrapper>
@@ -65,15 +45,15 @@ const Terminal: React.FunctionComponent = () => {
           Welcome to nmartinez.dev! Type <CommandText>help</CommandText> for a list of supported
           commands
         </TerminalLineOutput>
-        {commands.map((command) => (
+        {terminalState.commands.map((command) => (
           <div key={command}>
             <TerminalInput readOnly command={command} />
-            <TerminalOutput command={command} onClearCommands={onClearCommands} />
+            <TerminalOutput command={command} onClearCommands={clearTerminal} />
           </div>
         ))}
         <TerminalInput
           ref={inputRef}
-          onEnter={onEnterCommand}
+          onEnter={runCommand}
           getPreviousCommand={getPreviousCommand}
           getNextCommand={getNextCommand}
         />
@@ -81,4 +61,5 @@ const Terminal: React.FunctionComponent = () => {
     </TerminalWrapper>
   );
 };
+
 export default Terminal;
