@@ -8,7 +8,7 @@ const AboutCommandOutput: React.FunctionComponent = () => {
       Hi! <span>👋</span>
       <br />
       <br />
-      My name is Nico. I'm a 28 years-old Software Engineer from Uruguay. <br />
+      My name is Nico. I&apos;m a 28 years-old Software Engineer from Uruguay. <br />
       <br />I have a Computer Science Engineering degree from{' '}
       <Link href="https://www.fing.edu.uy/" target="_blank">
         Facultad de Ingenieria of Universidad de la Republica
@@ -20,7 +20,7 @@ const AboutCommandOutput: React.FunctionComponent = () => {
       new technologies that new challenges demands.
       <br />
       <br />
-      I'm currently working at{' '}
+      I&apos;m currently working at{' '}
       <Link href="https://www.noblypos.com/" target="_blank">
         Nobly POS
       </Link>{' '}

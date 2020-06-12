@@ -4,10 +4,21 @@ import { TerminalLineOutput, CommandText } from '../terminal/TerminalLine.styles
 const HelpCommandOutput: React.FunctionComponent = () => {
   return (
     <TerminalLineOutput>
-      Supported commands: <CommandText>about</CommandText>,{' '}
-      <CommandText>experience [--all]</CommandText>, <CommandText>education</CommandText>,{' '}
-      <CommandText>skills</CommandText>, <CommandText>download-cv</CommandText>,{' '}
-      <CommandText>clear</CommandText>{' '}
+      Supported commands:
+      <ul>
+        <li>
+          <CommandText>about</CommandText>
+        </li>
+        <li>
+          <CommandText>experience [--nobly] [--octobot] [--saico] [--all]</CommandText>
+        </li>
+        <li>
+          <CommandText>education</CommandText>
+        </li>
+        <li>
+          <CommandText>download-cv</CommandText>
+        </li>
+      </ul>
     </TerminalLineOutput>
   );
 };

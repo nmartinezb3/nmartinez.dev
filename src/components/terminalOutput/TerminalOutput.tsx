@@ -13,6 +13,9 @@ export enum Command {
   ABOUT = 'about',
   EXPERIENCE = 'experience',
   EXPERIENCE_ALL = 'experience --all',
+  EXPERIENCE_NOBLY = 'experience --nobly',
+  EXPERIENCE_OCTOBOT = 'experience --octobot',
+  EXPERIENCE_SAICO = 'experience --saico',
   EDUCATION = 'education',
   SKILLS = 'skills',
   DOWNLOAD_CV = 'download-cv',
@@ -31,6 +34,12 @@ const checkSudo = (input: string) => {
   }
   return 'sudo';
 };
+const checkExperience = (input: string) => {
+  if (input.match(/^experience$|^experience(\s--\w*)*$/)) {
+    return input;
+  }
+  return 'experience';
+};
 
 const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
   props: ITerminalOutputProps
@@ -40,9 +49,9 @@ const TerminalOutput: React.FunctionComponent<ITerminalOutputProps> = (
       return <HelpCommandOutput />;
     case Command.ABOUT:
       return <AboutCommandOutput />;
-    case Command.EXPERIENCE:
-    case Command.EXPERIENCE_ALL:
-      return <ExperienceCommandOutput showAll={props.command.includes('--all')} />;
+
+    case checkExperience(props.command):
+      return <ExperienceCommandOutput command={props.command} />;
     case Command.EDUCATION:
       return <EducationCommandOutput />;
     case Command.SKILLS:

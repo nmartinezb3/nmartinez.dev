@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   ArrowIconWrapper,
@@ -47,7 +48,7 @@ const TerminalInputRef = (props: ITerminalInputProps, ref: any) => {
       ref.current.selectionEnd = command.length;
       shouldMoveCaret.current = false;
     }
-  }, [command]);
+  }, [command, ref]);
 
   return (
     <TerminalInputContainer>

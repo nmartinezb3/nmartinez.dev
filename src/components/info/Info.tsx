@@ -24,7 +24,13 @@ const Info: React.FunctionComponent = () => {
             <Link onClick={() => runCommand(Command.EXPERIENCE)}>Experience</Link>
             <ul>
               <li>
-                <Link onClick={() => runCommand(Command.EXPERIENCE_ALL)}>With details</Link>
+                <Link onClick={() => runCommand(Command.EXPERIENCE_NOBLY)}>Nobly POS</Link>
+              </li>
+              <li>
+                <Link onClick={() => runCommand(Command.EXPERIENCE_OCTOBOT)}>Octobot</Link>
+              </li>
+              <li>
+                <Link onClick={() => runCommand(Command.EXPERIENCE_SAICO)}>SAICO Sistemas</Link>
               </li>
             </ul>
           </li>
