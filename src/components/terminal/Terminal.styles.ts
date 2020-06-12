@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { device } from '../../helpers/mediaQuery';
 
 export const TerminalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 600px;
+  @media ${device.tablet} {
+    height: 100%;
+    overflow: hidden;
+  }
 `;
 
 export const TerminalHeader = styled.div`

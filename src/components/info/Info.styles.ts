@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../helpers/mediaQuery';
 
 export const InfoWrapper = styled.div`
   background: rgb(23, 42, 69);
@@ -14,6 +15,9 @@ export const Avatar = styled.img`
   height: 200px;
   margin: auto;
   margin-bottom: 10px;
+  @media ${device.tablet} {
+    display: none;
+  }
 `;
 
 export const Profile = styled.div`
