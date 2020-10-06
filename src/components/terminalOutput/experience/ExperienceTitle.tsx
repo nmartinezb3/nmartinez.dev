@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from '../TerminalOutput.styles';
 
 interface IExperienceTitleProps {
@@ -10,18 +10,29 @@ interface IExperienceTitleProps {
 }
 export const ExperienceTitle: React.FunctionComponent<IExperienceTitleProps> = (
   props: IExperienceTitleProps
-) => (
-  <b>
-    <i>
-      <Link onClick={props.onClick}>{props.title}</Link> ({props.from} - {props.to})
-      {props.url && (
-        <>
-          <span> - </span>
-          <Link href={`https://${props.url}`} target="_blank">
-            {props.url}
-          </Link>
-        </>
-      )}
-    </i>
-  </b>
-);
+) => {
+  const onClick = useCallback(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      props.onClick?.();
+    },
+    [props.onClick]
+  );
+
+  return (
+    <b>
+      <i>
+        <Link onClick={onClick}>{props.title}</Link> ({props.from} - {props.to})
+        {props.url && (
+          <>
+            <span> - </span>
+            <Link href={`https://${props.url}`} target="_blank">
+              {props.url}
+            </Link>
+          </>
+        )}
+      </i>
+    </b>
+  );
+};

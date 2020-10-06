@@ -10,19 +10,23 @@ import { TerminalLineOutput, CommandText } from './TerminalLine.styles';
 import TerminalInput from '../terminalInput/TerminalInput';
 import TerminalOutput from '../terminalOutput/TerminalOutput';
 import useTerminal from '../../terminalState/useTerminal';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 const Terminal: React.FunctionComponent = () => {
   const { terminalState, runCommand, clearTerminal, getPreviousCommand } = useTerminal();
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalContentRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery('(max-width: 480px)');
 
   useEffect(() => {
-    inputRef.current?.focus();
+    if (!isMobile) {
+      inputRef.current?.focus();
+    }
     terminalContentRef.current?.scrollTo({
       behavior: 'smooth',
       top: terminalContentRef.current.scrollHeight,
     });
-  }, [terminalState.commands]);
+  }, [terminalState.commands, isMobile]);
 
   const getNextCommand = (): string => {
     return '';

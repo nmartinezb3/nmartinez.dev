@@ -5,7 +5,10 @@ import { Link } from './TerminalOutput.styles';
 const AboutCommandOutput: React.FunctionComponent = () => {
   return (
     <TerminalLineOutput>
-      Hi! <span>👋</span>
+      Hi!{' '}
+      <span role="img" aria-label="hi">
+        👋
+      </span>
       <br />
       <br />
       My name is Nico. I&apos;m a 28 years-old Software Engineer from Uruguay. <br />
@@ -27,7 +30,15 @@ const AboutCommandOutput: React.FunctionComponent = () => {
       as a Full Stack Engineer.
       <br />
       <br />
-      Outside of my job, I love surfing 🏄‍♂️ and traveling 🛫.
+      Outside of my job, I love surfing{' '}
+      <span role="img" aria-label="surf">
+        🏄‍♂️
+      </span>{' '}
+      and traveling{' '}
+      <span role="img" aria-label="plane">
+        🛫
+      </span>
+      .
     </TerminalLineOutput>
   );
 };
